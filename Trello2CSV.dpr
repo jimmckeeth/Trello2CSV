@@ -4,7 +4,8 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   Trello2CSV_Main in 'Trello2CSV_Main.pas' {Form5},
-  T2C_Settings in 'T2C_Settings.pas';
+  T2C_Settings in 'T2C_Settings.pas',
+  REST.Response.Adapter in 'REST.Response.Adapter.pas';
 
 {$R *.res}
 
