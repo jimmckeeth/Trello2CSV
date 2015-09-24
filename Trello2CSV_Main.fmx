@@ -225,133 +225,7 @@ object Form5: TForm5
     Top = 360
   end
   object CardsTable: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'id'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'checkItemStates'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'closed'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'dateLastActivity'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'desc'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'descData'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'idBoard'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'idList'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'idMembersVoted'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'idShort'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'idAttachmentCover'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'manualCoverAttachment'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'idLabels'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'name'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'pos'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'shortLink'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'badges'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'due'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'idChecklists'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'idMembers'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'labels'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'shortUrl'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'subscribed'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'url'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'attachments'
-        DataType = ftWideString
-        Size = 255
-      end>
+    FieldDefs = <>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -362,9 +236,109 @@ object Form5: TForm5
     StoreDefs = True
     Left = 232
     Top = 376
+    object CardsTableid: TWideStringField
+      FieldName = 'id'
+      Size = 255
+    end
+    object CardsTablecheckItemStates: TWideStringField
+      FieldName = 'checkItemStates'
+      Size = 255
+    end
+    object CardsTableclosed: TWideStringField
+      FieldName = 'closed'
+      Size = 255
+    end
+    object CardsTabledateLastActivity: TWideStringField
+      FieldName = 'dateLastActivity'
+      Size = 255
+    end
+    object CardsTabledesc: TWideMemoField
+      FieldName = 'desc'
+      BlobType = ftWideMemo
+      Size = 2147483647
+    end
+    object CardsTabledescData: TWideStringField
+      FieldName = 'descData'
+      Size = 255
+    end
+    object CardsTableidBoard: TWideStringField
+      FieldName = 'idBoard'
+      Size = 255
+    end
+    object CardsTableidList: TWideStringField
+      FieldName = 'idList'
+      Size = 255
+    end
+    object CardsTableidMembersVoted: TWideStringField
+      FieldName = 'idMembersVoted'
+      Size = 255
+    end
+    object CardsTableidShort: TWideStringField
+      FieldName = 'idShort'
+      Size = 255
+    end
+    object CardsTableidAttachmentCover: TWideStringField
+      FieldName = 'idAttachmentCover'
+      Size = 255
+    end
+    object CardsTablemanualCoverAttachment: TWideStringField
+      FieldName = 'manualCoverAttachment'
+      Size = 255
+    end
+    object CardsTableidLabels: TWideStringField
+      FieldName = 'idLabels'
+      Size = 255
+    end
+    object CardsTablename: TWideStringField
+      FieldName = 'name'
+      Size = 255
+    end
+    object CardsTablepos: TWideStringField
+      FieldName = 'pos'
+      Size = 255
+    end
+    object CardsTableshortLink: TWideStringField
+      FieldName = 'shortLink'
+      Size = 255
+    end
+    object CardsTablebadges: TWideStringField
+      FieldName = 'badges'
+      Size = 255
+    end
+    object CardsTabledue: TWideStringField
+      FieldName = 'due'
+      Size = 255
+    end
+    object CardsTableidChecklists: TWideStringField
+      FieldName = 'idChecklists'
+      Size = 255
+    end
+    object CardsTableidMembers: TWideStringField
+      FieldName = 'idMembers'
+      Size = 255
+    end
+    object CardsTablelabels: TWideStringField
+      FieldName = 'labels'
+      Size = 255
+    end
+    object CardsTableshortUrl: TWideStringField
+      FieldName = 'shortUrl'
+      Size = 255
+    end
+    object CardsTablesubscribed: TWideStringField
+      FieldName = 'subscribed'
+      Size = 255
+    end
+    object CardsTableurl: TWideStringField
+      FieldName = 'url'
+      Size = 255
+    end
+    object CardsTableattachments: TWideStringField
+      FieldName = 'attachments'
+      Size = 255
+    end
   end
   object CardsAdapter: TRESTResponseDataSetAdapter
-    Active = True
     Dataset = CardsTable
     FieldDefs = <>
     Response = RESTResponse1
@@ -415,6 +389,30 @@ object Form5: TForm5
     StoreDefs = True
     Left = 160
     Top = 376
+    object ListsTableid: TWideStringField
+      FieldName = 'id'
+      Size = 255
+    end
+    object ListsTablename: TWideStringField
+      FieldName = 'name'
+      Size = 255
+    end
+    object ListsTableclosed: TWideStringField
+      FieldName = 'closed'
+      Size = 255
+    end
+    object ListsTableidBoard: TWideStringField
+      FieldName = 'idBoard'
+      Size = 255
+    end
+    object ListsTablepos: TWideStringField
+      FieldName = 'pos'
+      Size = 255
+    end
+    object ListsTablesubscribed: TWideStringField
+      FieldName = 'subscribed'
+      Size = 255
+    end
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = FDQuery1
@@ -478,6 +476,26 @@ object Form5: TForm5
     StoreDefs = True
     Left = 88
     Top = 376
+    object LabelsTableid: TWideStringField
+      FieldName = 'id'
+      Size = 255
+    end
+    object LabelsTableidBoard: TWideStringField
+      FieldName = 'idBoard'
+      Size = 255
+    end
+    object LabelsTablename: TWideStringField
+      FieldName = 'name'
+      Size = 255
+    end
+    object LabelsTablecolor: TWideStringField
+      FieldName = 'color'
+      Size = 255
+    end
+    object LabelsTableuses: TWideStringField
+      FieldName = 'uses'
+      Size = 255
+    end
   end
   object FDBatchMoveTextWriter1: TFDBatchMoveTextWriter
     FileName = 'CodeRage.csv'

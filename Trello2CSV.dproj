@@ -307,7 +307,6 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="T2C_Settings.pas"/>
-        <DCCReference Include="REST.Response.Adapter.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
