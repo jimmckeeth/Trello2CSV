@@ -17,7 +17,7 @@ uses
   FireDAC.FMXUI.Wait, FireDAC.Phys.SQLiteVDataSet, REST.Client, FireDAC.DApt,
   FMX.ScrollBox, FMX.Memo, FireDAC.Comp.UI, FMX.Edit, FMX.ListBox,
   FireDAC.Comp.BatchMove.DataSet, FireDAC.Comp.BatchMove,
-  FireDAC.Comp.BatchMove.Text;
+  FireDAC.Comp.BatchMove.Text, T2C_Settings;
 
 type
   TForm5 = class(TForm)
@@ -32,9 +32,9 @@ type
     FDConnection1: TFDConnection;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     FDQuery1: TFDQuery;
-    Memo1: TMemo;
+    MemoQuery: TMemo;
     Button2: TButton;
-    Edit1: TEdit;
+    EditTrelloURL: TEdit;
     LinkControlToField1: TLinkControlToField;
     CardsTable: TFDMemTable;
     CardsAdapter: TRESTResponseDataSetAdapter;
@@ -58,10 +58,12 @@ type
     procedure TablesListClick(Sender: TObject);
     procedure TablesListDblClick(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
-  private
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private { Private declarations }
+    FSettings: TSettings;
+    const FSettingsFile: String = 'settings.json';
     { Private declarations }
-  public
-    { Public declarations }
   end;
 
 var
@@ -71,7 +73,7 @@ implementation
 
 {$R *.fmx}
 
-uses FMX.Memo.Types;
+uses FMX.Memo.Types, System.IOUtils, REST.JSON;
 
 procedure TForm5.Button1Click(Sender: TObject);
 begin
@@ -83,11 +85,8 @@ end;
 
 procedure TForm5.Button2Click(Sender: TObject);
 begin
-
-
-
   FDQuery1.FieldDefs.Clear;
-  FDQuery1.Open(Memo1.Text);
+  FDQuery1.Open(MemoQuery.Text);
 end;
 
 procedure TForm5.ButtonSaveClick(Sender: TObject);
@@ -96,7 +95,28 @@ begin
   begin
     FDBatchMoveTextWriter1.FileName := SaveDialog1.FileName;
     FDBatchMove1.Execute;
+    FDQuery1.Open();
   end;
+end;
+
+procedure TForm5.FormCreate(Sender: TObject);
+begin
+  if not TFile.Exists(FSettingsFile) then
+    FSettings := TSettings.Create
+  else
+  begin
+    FSettings := TJson.JsonToObject<TSettings>(TFile.ReadAllText(FSettingsFile));
+    EditTrelloURL.Text := FSettings.TrelloURL;
+    MemoQuery.Lines.Text := FSettings.SQL;
+  end;
+
+end;
+
+procedure TForm5.FormDestroy(Sender: TObject);
+begin
+  FSettings.TrelloURL := EditTrelloURL.Text;
+  FSettings.SQL := MemoQuery.Lines.Text;
+  TFile.WriteAllText(FSettingsFile, TJson.ObjectToJsonString(FSettings));
 end;
 
 procedure ListFields(DS: TDataSet; SL: TStrings);
@@ -124,9 +144,9 @@ var
 begin
   lb := Sender as TListBox;
   if Assigned(lb) then
-    Memo1.InsertAfter(Memo1.CaretPosition, lb.Selected.Text,
+    MemoQuery.InsertAfter(MemoQuery.CaretPosition, lb.Selected.Text,
       [TInsertOption.MoveCaret, TInsertOption.CanUndo, TInsertOption.Typed]);
-  Memo1.SetFocus;
+  MemoQuery.SetFocus;
 end;
 
 end.

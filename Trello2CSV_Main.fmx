@@ -7,22 +7,24 @@ object Form5: TForm5
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object Grid1: TGrid
     Align = Client
     Size.Width = 544.000000000000000000
-    Size.Height = 420.000000000000000000
+    Size.Height = 412.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     RowCount = 0
     RowHeight = 21.000000000000000000
     Viewport.Width = 540.000000000000000000
-    Viewport.Height = 395.000000000000000000
+    Viewport.Height = 387.000000000000000000
   end
   object Layout1: TLayout
     Align = Top
     Size.Width = 544.000000000000000000
-    Size.Height = 145.000000000000000000
+    Size.Height = 153.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     object Button1: TButton
@@ -47,11 +49,11 @@ object Form5: TForm5
       Text = 'Query'
       OnClick = Button2Click
     end
-    object Memo1: TMemo
+    object MemoQuery: TMemo
       Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
       DataDetectorTypes = []
       Lines.Strings = (
-        'select cards.id, lists.name , cards.name, desc'
+        'select cards.id, lists.name as List, cards.name as Card, desc'
         'from cards join lists on cards.idList = lists.id'
         'where '
         'lists.closed = '#39'False'#39' and'
@@ -60,16 +62,16 @@ object Form5: TForm5
       Position.X = 8.000000000000000000
       Position.Y = 56.000000000000000000
       Size.Width = 527.000000000000000000
-      Size.Height = 81.000000000000000000
+      Size.Height = 89.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
-      Viewport.Width = 507.000000000000000000
-      Viewport.Height = 77.000000000000000000
+      Viewport.Width = 523.000000000000000000
+      Viewport.Height = 85.000000000000000000
     end
-    object Edit1: TEdit
+    object EditTrelloURL: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 3
-      Text = 'https://trello.com/b/7dtcLR7c.json'
+      Text = 'https://trello.com/b/UgmkGUKj.json'
       Position.X = 8.000000000000000000
       Position.Y = 24.000000000000000000
       Size.Width = 225.000000000000000000
@@ -133,6 +135,15 @@ object Form5: TForm5
       OnClick = ButtonSaveClick
     end
   end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.csv'
+    FileName = 'trello.csv'
+    Filter = 'CSV|*.csv|Text|*.txt|All|*.*'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofPathMustExist, ofEnableSizing]
+    Title = 'Save CSV as . . .'
+    Left = 344
+    Top = 464
+  end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
@@ -142,7 +153,7 @@ object Form5: TForm5
       Category = 'Quick Bindings'
       DataSource = RESTClient1
       FieldName = 'BaseURL'
-      Control = Edit1
+      Control = EditTrelloURL
       Track = False
     end
     object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
@@ -301,14 +312,5 @@ object Form5: TForm5
     DataSet = FDQuery1
     Left = 352
     Top = 352
-  end
-  object SaveDialog1: TSaveDialog
-    DefaultExt = '.csv'
-    FileName = 'trello.csv'
-    Filter = 'CSV|*.csv|Text|*.txt|All|*.*'
-    Options = [ofOverwritePrompt, ofHideReadOnly, ofPathMustExist, ofEnableSizing]
-    Title = 'Save CSV as . . .'
-    Left = 344
-    Top = 464
   end
 end
