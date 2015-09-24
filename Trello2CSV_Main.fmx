@@ -1,0 +1,314 @@
+object Form5: TForm5
+  Left = 0
+  Top = 0
+  Caption = 'Trello 2 CSV'
+  ClientHeight = 565
+  ClientWidth = 657
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Grid1: TGrid
+    Align = Client
+    Size.Width = 544.000000000000000000
+    Size.Height = 420.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    RowCount = 0
+    RowHeight = 21.000000000000000000
+    Viewport.Width = 540.000000000000000000
+    Viewport.Height = 395.000000000000000000
+  end
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 544.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Button1: TButton
+      Position.X = 240.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Connect'
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Anchors = [akTop, akRight]
+      Default = True
+      Position.X = 456.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Query'
+      OnClick = Button2Click
+    end
+    object Memo1: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      Lines.Strings = (
+        'select cards.id, lists.name , cards.name, desc'
+        'from cards join lists on cards.idList = lists.id'
+        'where '
+        'lists.closed = '#39'False'#39' and'
+        'cards.closed = '#39'False'#39)
+      Anchors = [akLeft, akTop, akRight]
+      Position.X = 8.000000000000000000
+      Position.Y = 56.000000000000000000
+      Size.Width = 527.000000000000000000
+      Size.Height = 81.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Viewport.Width = 507.000000000000000000
+      Viewport.Height = 77.000000000000000000
+    end
+    object Edit1: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 3
+      Text = 'https://trello.com/b/7dtcLR7c.json'
+      Position.X = 8.000000000000000000
+      Position.Y = 24.000000000000000000
+      Size.Width = 225.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object Label1: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 5.000000000000000000
+      Text = 'Trello JSON URL'
+    end
+  end
+  object Layout2: TLayout
+    Align = MostRight
+    Position.X = 544.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 565.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 17
+    object TablesList: TListBox
+      Align = Top
+      Size.Width = 113.000000000000000000
+      Size.Height = 73.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnClick = TablesListClick
+      OnDblClick = TablesListDblClick
+      DisableFocusEffect = True
+      Items.Strings = (
+        'lists'
+        'cards'
+        'labels')
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 109.000000000000000000
+      Viewport.Height = 69.000000000000000000
+    end
+    object FieldsList: TListBox
+      Align = Client
+      Size.Width = 113.000000000000000000
+      Size.Height = 447.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      OnDblClick = TablesListDblClick
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 109.000000000000000000
+      Viewport.Height = 443.000000000000000000
+    end
+    object ButtonSave: TButton
+      Align = Bottom
+      Position.Y = 520.000000000000000000
+      Size.Width = 113.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 22
+      Text = 'Save'
+      OnClick = ButtonSaveClick
+    end
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 412
+    Top = 181
+    object LinkControlToField1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = RESTClient1
+      FieldName = 'BaseURL'
+      Control = Edit1
+      Track = False
+    end
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = Grid1
+      Columns = <>
+    end
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'UTF-8, *;q=0.8'
+    BaseURL = 'https://trello.com/b/7dtcLR7c.json'
+    Params = <>
+    HandleRedirects = True
+    RaiseExceptionOn500 = False
+    Left = 160
+    Top = 160
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 256
+    Top = 152
+  end
+  object RESTResponse1: TRESTResponse
+    Left = 168
+    Top = 208
+  end
+  object FDLocalSQL1: TFDLocalSQL
+    SchemaName = 'default'
+    Connection = FDConnection1
+    DataSets = <
+      item
+        DataSet = CardsTable
+        Name = 'cards'
+      end
+      item
+        DataSet = ListsTable
+        Name = 'lists'
+      end
+      item
+        DataSet = LabelsTable
+        Name = 'labels'
+      end>
+    Left = 392
+    Top = 272
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'DriverID=sQLite')
+    LoginPrompt = False
+    Left = 472
+    Top = 272
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'FMX'
+    Left = 496
+    Top = 216
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from cards')
+    Left = 472
+    Top = 360
+  end
+  object CardsTable: TFDMemTable
+    FieldDefs = <>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired]
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 232
+    Top = 376
+  end
+  object CardsAdapter: TRESTResponseDataSetAdapter
+    Dataset = CardsTable
+    FieldDefs = <>
+    Response = RESTResponse1
+    RootElement = 'cards'
+    Left = 232
+    Top = 288
+  end
+  object ListsTable: TFDMemTable
+    FieldDefs = <>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired]
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 160
+    Top = 376
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = FDQuery1
+    ScopeMappings = <>
+    Left = 288
+    Top = 216
+  end
+  object ListsAdapter: TRESTResponseDataSetAdapter
+    Dataset = ListsTable
+    FieldDefs = <>
+    Response = RESTResponse1
+    RootElement = 'lists'
+    Left = 168
+    Top = 288
+  end
+  object LabelsAdapter: TRESTResponseDataSetAdapter
+    Dataset = LabelsTable
+    FieldDefs = <>
+    Response = RESTResponse1
+    RootElement = 'labels'
+    Left = 88
+    Top = 288
+  end
+  object LabelsTable: TFDMemTable
+    FieldDefs = <>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired]
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 88
+    Top = 376
+  end
+  object FDBatchMoveTextWriter1: TFDBatchMoveTextWriter
+    FileName = 'CodeRage.csv'
+    DataDef.Fields = <>
+    DataDef.WithFieldNames = True
+    Left = 432
+    Top = 464
+  end
+  object FDBatchMove1: TFDBatchMove
+    Reader = FDBatchMoveDataSetReader1
+    Writer = FDBatchMoveTextWriter1
+    Options = [poClearDest, poIdentityInsert, poCreateDest]
+    Mappings = <>
+    LogFileName = 'Data.log'
+    Left = 368
+    Top = 400
+  end
+  object FDBatchMoveDataSetReader1: TFDBatchMoveDataSetReader
+    DataSet = FDQuery1
+    Left = 352
+    Top = 352
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.csv'
+    FileName = 'trello.csv'
+    Filter = 'CSV|*.csv|Text|*.txt|All|*.*'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofPathMustExist, ofEnableSizing]
+    Title = 'Save CSV as . . .'
+    Left = 344
+    Top = 464
+  end
+end
