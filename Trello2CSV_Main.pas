@@ -108,6 +108,7 @@ begin
     FSettings := TJson.JsonToObject<TSettings>(TFile.ReadAllText(FSettingsFile));
     EditTrelloURL.Text := FSettings.TrelloURL;
     MemoQuery.Lines.Text := FSettings.SQL;
+    RESTClient1.BaseURL := FSettings.TrelloURL;
   end;
 
 end;

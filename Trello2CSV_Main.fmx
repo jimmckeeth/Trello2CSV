@@ -29,7 +29,7 @@ object Form5: TForm5
     TabOrder = 1
     object Button1: TButton
       Position.X = 240.000000000000000000
-      Position.Y = 24.000000000000000000
+      Position.Y = 23.000000000000000000
       Size.Width = 65.000000000000000000
       Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
